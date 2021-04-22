@@ -1,0 +1,41 @@
+body {
+  background-color: rgb(201, 105, 105);
+}
+
+#weather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  border: solid 2px gray;
+  border-radius: 30px;
+  color: whitesmoke;
+  text-shadow: 2px 2px 5px #000000;
+  box-shadow: 0 4px 8px 0 rgba(54, 163, 39, 0.8), 0 6px 20px 0 rgba(61, 20, 207, 0.5);
+}
+
+#tempeture {
+  display: flex;
+  background-color: rgb(54, 192, 178);
+  border-radius: 0 26px 26px 0;
+}
+
+#cityName,
+#tempetureImg {
+  margin-left: 3px;
+}
+
+#mensureTemp {
+  margin-right: 3px;
+}
+
+#weatherDescription {
+  font-weight: bolder;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  align-self: flex-end;
+  margin-right: 30px;
+}
+
+#city {
+  margin-right: 30px;
+}

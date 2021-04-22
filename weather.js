@@ -5,6 +5,10 @@ let requestUrl = new URL('https://api.weatherbit.io/v2.0/current');
 let latitude = 41.390205;
 let longitude = 2.154007;
 
+//Esconder el contenedor del clima.
+let divWeather = document.getElementById('weather');
+divWeather.style.display = 'none';
+
 //Verificar si el navegador soporta geolocalización.
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(success, error);
@@ -34,6 +38,7 @@ let mensureTemp = document.getElementById('mensureTemp');
 let weatherDescription = document.getElementById('weatherDescription');
 
 //Renderizar las variables
+divWeather.style.display = 'flex';
 loadingH2.style.display = 'none'
 let iconCode = result.data[0].weather.icon;
 cityName.innerText = result.data[0].city_name;
