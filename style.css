@@ -39,3 +39,7 @@ body {
 #city {
   margin-right: 30px;
 }
+/* Ocultar lista de ciudades para que se despleguen solo con la busqueda 
+#citiesList {
+  display: none;
+}*/
