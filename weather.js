@@ -1,3 +1,5 @@
+//Parte 1.
+//1.2 Consultar el tiempo usando la api Weatherbit.io  con latitude y longitude como parametros.
 let apikey = '2d84c821e1ab4563b168e4d981912515';
 //URL de los recursos.
 let requestUrl = new URL('https://api.weatherbit.io/v2.0/current');
@@ -27,8 +29,7 @@ function success(geolocationPosition) {
 function error(err) {
   alert(err.message)
 }
-
-//Manipular el DOM
+//1.3 Manipular el DOM
 function render(result) {
 //Crear varialbes
 let loadingH2 = document.getElementById('loadingH2') 
@@ -39,7 +40,7 @@ let weatherDescription = document.getElementById('weatherDescription');
 
 //Renderizar las variables
 divWeather.style.display = 'flex';
-loadingH2.style.display = 'none'
+//loadingH2.style.display = 'none'
 let iconCode = result.data[0].weather.icon;
 cityName.innerText = result.data[0].city_name;
 tempetureImg.src = `https://www.weatherbit.io/static/img/icons/${iconCode}.png`;
@@ -47,7 +48,7 @@ mensureTemp.innerText = `${result.data[0].temp} Centigrade`;
 weatherDescription.innerText = result.data[0].weather.description; 
 }
 
-//funcion para realizar request.
+//1.4 y 1.5 funcion para realizar request.
 function getWeatherByCoords(url) {
   url.searchParams.set("lat", latitude);
   url.searchParams.set("lon", longitude);
@@ -62,3 +63,32 @@ function getWeatherByCoords(url) {
       console.error('Error:', error);
     });
 }
+
+//Parte 3
+//3.1 Crear array con diferentes ciudades.
+const cities =[ 
+  {
+    name: 'Madrid',
+    latitude: 40.41,
+    longitude: -3.70,
+  },
+
+  {
+    name: 'Valencia',
+    latitude: 39.466667,
+    longitude: -0.375000,
+  },
+
+  {
+    name: 'Zaragoza',
+    latitude: 41.649693,
+    longitude: -3.70,
+  },
+
+  {
+    name: 'Palma de Mallorca',
+    latitude: 39.571625,
+    longitude: 2.650544,
+  }
+]
+
