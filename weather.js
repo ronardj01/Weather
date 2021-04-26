@@ -173,6 +173,7 @@ function getWeatherByCity(url) {
     })
     .catch((error) => {
       console.error('Error:', error);
+      alert('Please check your city name and country')
     });
 }
 
