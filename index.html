@@ -12,9 +12,16 @@
 <body>
   <h2 id='loadingH2'>LOADING</h2>
 
-  <!-- Filtrar las ciudades permitidas -->
-  <input type="search" id='inputCities' placeholder="Cities">
-  
+  <!-- Input para la busqueda de por ciudades -->
+  <div id="divInputCities">
+    <div id="searchOptions">
+      <h3>Enter city's name and country separated by comma</h3>
+      <p>e.g(santo domingo, do)</p>
+      <input type="text" id='inputCities' placeholder="Cities Names">
+      <button id="inputBnt">Search</button>
+    </div>
+  </div>
+
   <ul id="citiesList"></ul>
 
   <!-- Tarjeta del tiempo -->

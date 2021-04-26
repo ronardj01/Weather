@@ -2,7 +2,7 @@
 //1.2 Consultar el tiempo usando la api Weatherbit.io  con latitude y longitude como parametros.
 let apikey = '2d84c821e1ab4563b168e4d981912515';
 //URL de los recursos.
-let requestUrl = new URL('https://api.weatherbit.io/v2.0/current');
+let requestUrlCoords = new URL('https://api.weatherbit.io/v2.0/current');
 //Coordenadas de Barcelona
 let latitude = 41.390205;
 let longitude = 2.154007;
@@ -16,13 +16,13 @@ if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(success, error);
 } else {
   //En caso de no usar geolocalizacion usar coordenadas de Barcelona.
-  getWeatherByCoords(requestUrl)
+  getWeatherByCoords(requestUrlCoords);
 }
 
 function success(geolocationPosition) {
   latitude = geolocationPosition.coords.latitude;
   longitude = geolocationPosition.coords.longitude;
-  getWeatherByCoords(requestUrl)
+  getWeatherByCoords(requestUrlCoords);
 }
 
 //En caso de que ocurra algo con el geolocalizador.
@@ -40,7 +40,7 @@ function render(result) {
 
   //Renderizar las variables
   divWeather.style.display = 'flex';
-  //loadingH2.style.display = 'none'
+  loadingH2.style.display = 'none'
   let iconCode = result.data[0].weather.icon;
   cityName.innerText = result.data[0].city_name;
   tempetureImg.src = `https://www.weatherbit.io/static/img/icons/${iconCode}.png`;
@@ -48,7 +48,7 @@ function render(result) {
   weatherDescription.innerText = result.data[0].weather.description;
 }
 
-//1.4 y 1.5 funcion para realizar request.
+//1.4 y 1.5 funcion para realizar request por coordenadas.
 function getWeatherByCoords(url) {
   url.searchParams.set("lat", latitude);
   url.searchParams.set("lon", longitude);
@@ -65,7 +65,7 @@ function getWeatherByCoords(url) {
 }
 
 //Parte 3
-//3.1 Crear array con diferentes ciudades.
+/* //3.1 Crear array con diferentes ciudades. Realmente se utilizara la api este paso es solo para probar.
 const cities = [
   {
     name: 'Madrid',
@@ -92,7 +92,7 @@ const cities = [
   }
 ]
 
-//3.2 Crear input para selecionar ciudades del array.
+//3.2 Crear input para selecionar ciudades del array. 
 
 //Variables para manipular el DOM.
 let citiesList = document.getElementById('citiesList');
@@ -102,9 +102,14 @@ let inputCities = document.getElementById('inputCities');
 inputCities.addEventListener('keyup', (evento) => {
   document.querySelectorAll(`#citiesList li`).forEach(li => li.remove()); //Filtrar segun incremente el numero de los digitos.
   const search = evento.target.value.toLowerCase();   //Buscar en minuscula para evitar el caseSensitive.
-  //tomar el array de ciudad y pasar un indexOf del search.
-  cities.forEach((city, index) => {
-    if (city.name.toLowerCase().indexOf(search) != -1) { //Buscar en minusculas
+
+  createCitySearchingFromArray (cities, search);
+})
+
+//
+function createCitySearchingFromArray (arr, searchValue) {
+  arr.forEach((city, index) => {
+    if (city.name.toLowerCase().indexOf(searchValue) != -1 && searchValue.length > 0) { //Buscar en minusculas
       let li = document.createElement('li');
       li.id = `searchCity${index}`;
       li.innerText = city.name;
@@ -113,6 +118,40 @@ inputCities.addEventListener('keyup', (evento) => {
       document.querySelectorAll(`#inputCities li`).forEach(li => li.remove());
     }
   })
-})
+} */
 
+//3.3 Consultar el tiempo usando el nombre de la ciudad como parametros en el input.
+//URL de los recursos.
+let requestUrlCity = new URL('https://api.weatherbit.io/v2.0/current');
+//Variables del input.
+let inputCities = document.getElementById('inputCities');
+let inputBnt = document.getElementById('inputBnt');
+
+//Valores de las ciudad y el pais.
+//let serachOptionArr = inputCities.value.split(',') 
+let city = "";
+let country = "";
+
+//Funcionalidad del inputBnt.
+inputBnt.addEventListener('click', () => {
+let serachOptionArr = inputCities.value.split(',');
+city = serachOptionArr[0].trim();
+country = serachOptionArr[1].trim();
+  getWeatherByCity(requestUrlCity)});
+
+//funcion para realizar request por ciudad.
+function getWeatherByCity(url) {
+  url.searchParams.set("city", city);
+  url.searchParams.set("country", country);
+  url.searchParams.set('key', apikey)
+
+  fetch(url)
+    .then(response => response.json())
+    .then(result => {
+      render(result)
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
 

@@ -2,7 +2,7 @@ body {
   background-color: rgb(201, 105, 105);
 }
 
-#weather {
+#weather, #divInputCities {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,7 @@ body {
 #cityName,
 #tempetureImg {
   margin-left: 3px;
+  margin-right: 5px;
 }
 
 #mensureTemp {
@@ -36,10 +37,19 @@ body {
   margin-right: 30px;
 }
 
-#city {
+#city {s
   margin-right: 30px;
 }
-/* Ocultar lista de ciudades para que se despleguen solo con la busqueda 
-#citiesList {
-  display: none;
-}*/
+ 
+/* Estilos del input */
+#searchOptions {
+  margin-bottom: 15px;
+  text-align: center;
+  color: rgb(98, 221, 209);
+}
+
+#inputCities, #inputBnt {
+  border-radius: 15px;
+  font-size: large;
+  box-shadow: 0 4px 8px 0 rgba(54, 163, 39, 0.8), 0 6px 20px 0 rgba(61, 20, 207, 0.5);
+}
