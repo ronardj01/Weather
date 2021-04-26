@@ -2,11 +2,11 @@ body {
   background-color: rgb(201, 105, 105);
 }
 
-#weather, #divInputCities {
+#weather, #divInputCities, #map {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
   border: solid 2px gray;
   border-radius: 30px;
   color: whitesmoke;
@@ -37,7 +37,7 @@ body {
   margin-right: 30px;
 }
 
-#city {s
+#city {
   margin-right: 30px;
 }
  
@@ -52,4 +52,11 @@ body {
   border-radius: 15px;
   font-size: large;
   box-shadow: 0 4px 8px 0 rgba(54, 163, 39, 0.8), 0 6px 20px 0 rgba(61, 20, 207, 0.5);
+}
+
+#map{
+  margin: auto;
+  margin-top: 20px;
+  max-width: 70%;
+  min-height: 300px;
 }

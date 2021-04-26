@@ -46,6 +46,26 @@ function render(result) {
   tempetureImg.src = `https://www.weatherbit.io/static/img/icons/${iconCode}.png`;
   mensureTemp.innerText = `${result.data[0].temp} Centigrade`;
   weatherDescription.innerText = result.data[0].weather.description;
+
+  //Parte 4.
+  //Agregar mapa.
+  document.querySelectorAll(`#map`).forEach(element => element.remove())// Eliminar renderizados anteriores.
+  let divMap = document.createElement('div'); // crear contenedor del mapa segun documentacion.
+  divMap.id = 'map'
+  document.body.appendChild(divMap);
+  //Estrutura basica mapa segun documentacion api mapbox.
+  mapboxgl.accessToken = 'pk.eyJ1Ijoicm9uYXJkajAxIiwiYSI6ImNrbnlnYzh3ODA2bGgyeHJqbmFjdmY5bWwifQ.0ANXFEkI9Ska2GuRNNrqaQ';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [result.data[0].lon, result.data[0].lat],
+    zoom: 6
+  });
+
+  //Crear un marcador en el mapa con la api de mapbox.
+  var marker1 = new mapboxgl.Marker()
+    .setLngLat([result.data[0].lon, result.data[0].lat])
+    .addTo(map);
 }
 
 //1.4 y 1.5 funcion para realizar request por coordenadas.
@@ -134,10 +154,11 @@ let country = "";
 
 //Funcionalidad del inputBnt.
 inputBnt.addEventListener('click', () => {
-let serachOptionArr = inputCities.value.split(',');
-city = serachOptionArr[0].trim();
-country = serachOptionArr[1].trim();
-  getWeatherByCity(requestUrlCity)});
+  let serachOptionArr = inputCities.value.split(',');
+  city = serachOptionArr[0].trim();
+  country = serachOptionArr[1].trim();
+  getWeatherByCity(requestUrlCity)
+});
 
 //funcion para realizar request por ciudad.
 function getWeatherByCity(url) {
@@ -154,4 +175,5 @@ function getWeatherByCity(url) {
       console.error('Error:', error);
     });
 }
+
 
